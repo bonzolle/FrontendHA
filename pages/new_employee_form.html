@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="scripts/leftmenu.js"></script>
+    <!-- ============== Gemensam CSS filer ============== -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="css/leftmenu.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+
+        function formCheck() {
+            var file = document.getElementById("photoFile").value;
+
+            var filename = file.substring(file.lastIndexOf('\\') + 1, file.length);
+
+            var ecode = document.getElementById("femployeecode").value;
+
+            var access = document.getElementById("fsecurityaccess").value;
+
+            var name = document.getElementById("fname").value;
+
+            var dob = document.getElementById("fdateofbirth").value;
+
+            var sex = document.getElementById("fsex").value;
+
+            var blood = document.getElementById("fbloodtype").value;
+
+            var height = document.getElementById("fheight").value;
+
+            var weight = document.getElementById("fweight").value;
+
+            var department = document.getElementById("fdepartment").value;
+
+            var rank = document.getElementById("frank").value;
+
+            var background = document.getElementById("fbackground").value;
+
+            var strengths = document.getElementById("fstrengths").value;
+
+            var weaknesses = document.getElementById("fweaknesses").value;
+
+
+
+            if (ecode === "" || !ecode.includes("-")) {
+                alert("Ange en giltig employee code (ex: ABC-123)");
+                return false;
+            }
+            if (name === "") {
+                alert("You must give a name");
+                return false;
+
+            }
+            if (blood === "") {
+                alert("You must give a blood-type");
+                return false;
+
+            }
+            if (height === "") {
+                alert("You must give a height");
+                return false;
+
+            }
+            if (weight === "") {
+                alert("You must give a weight");
+                return false;
+
+            }
+            if (department === "") {
+                alert("You must give a department");
+                return false;
+
+            }
+            if (rank === "") {
+                alert("You must give a rank");
+                return false;
+
+            }
+
+            // === textarea ===
+
+            if (background === "") {
+                alert("You must give a Backround");
+                return false;
+
+            }
+
+            if (strengths === "") {
+                alert("You must list Strengths");
+                return false;
+
+            }
+
+            if (weaknesses === "") {
+                alert("You must list Weaknesses");
+                return false;
+
+            }
+
+            // === Bild ===
+
+            if (file === "") {
+                alert("You must import a jpg");
+                return false;
+
+            }
+
+            if (file != "") {
+                if (file.substring(file.lastIndexOf("."), file.length) != ".jpg") {
+                    alert("Only pictures in jpg-format");
+                    return false;
+                }
+
+                if (file.includes(" ")) {
+                    alert("Filename contains space")
+                    return false
+                }
+
+                if (file.includes("å") || file.includes("ä") || file.includes("ö")) {
+                    alert("Filename contains åäö")
+                    return false
+                }
+
+                if (file.includes("Å") || file.includes("Ä") || file.includes("Ö")) {
+                    alert("Filename contains ÅÄÖ")
+                    return false
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+    </script>
+    <style>
+        /* Make all labels uppercase */
+        .variabel-label span,
+        .variabel-label {
+            text-transform: uppercase;
+        }
+
+
+
+        .boxrubrik {
+            width: 758px;
+            margin-left: 110px;
+            border: 1px solid;
+            border-color: #000000;
+        }
+
+        td.boxrubriktext {
+            height: 30px;
+            background-color: #274f26;
+            text-align: left;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        table.yttretabell {
+            display: block;
+            margin-left: 110px;
+            width: 758px;
+            border: 1px solid;
+            border-color: #000000;
+            margin-bottom: 20px;
+            background-image: url("../images/tablebg.gif");
+        }
+
+        .mellantabell {
+            margin-top: 30px;
+            margin-left: 30px;
+            margin-bottom: 30px;
+            margin-right: 182px;
+            vertical-align: top;
+        }
+
+        td.fotokolumn {
+            border: 1px solid #000000;
+            width: auto;
+            vertical-align: top;
+        }
+
+        table.fotokolumn {
+            border: 0px solid #000000;
+
+        }
+
+        td.fotokolumntextkod {
+            font-weight: bold;
+            width: 166px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            color: #000000;
+            background-color: #c5f7ff;
+            font-size: 14px;
+
+        }
+
+        .employee {
+            color: #686868;
+
+        }
+
+        .kod {
+            font-size: 16px;
+        }
+
+
+        td.fotokolumntextlevel {
+            font-weight: bold;
+            width: 166px;
+            height: 100px;
+            text-align: center;
+            vertical-align: middle;
+            color: #000000;
+            background-color: #70b8c3;
+            font-size: 14px;
+
+        }
+
+        .level {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .spacer10 {
+            height: 10px;
+        }
+
+        td.variabler {
+            padding-left: 50px;
+            margin-bottom: 30px;
+            vertical-align: top;
+            width: 250px;
+        }
+
+        .variabler-tabell {
+            border-collapse: collapse;
+        }
+
+        .variabel-label {
+            padding-right: 10px;
+            width: 100%;
+            height: 30px;
+            text-align: right;
+            vertical-align: top;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #686868;
+            font-weight: bold;
+        }
+
+        /* ====== Värden-kolumn ====== */
+
+        td.varden {
+            vertical-align: top;
+            width: 245px;
+        }
+
+        .varden-tabell {
+            border-collapse: collapse;
+        }
+
+        .varde-rad {
+            width: 245px;
+            height: 29px;
+            text-align: left;
+            vertical-align: middle;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .varde-linje {
+            height: 1px;
+            background-color: #000000;
+
+        }
+
+        .varde-spacer {
+            height: 10px;
+
+        }
+
+
+        input[type=text],
+        input[type=date],
+        input[type=file],
+        select,
+        textarea {
+            padding: 5px 5px;
+            box-sizing: border-box;
+            border: 1px solid black;
+            background-color: #d7ecff;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            color: transparent;
+            width: 166px;
+        }
+
+        select option {
+            margin: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 16px;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+
+        }
+
+        .spaceleft {
+            width: 30px;
+            padding: 0%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!------------------------- Header start ------------------------------>
+    <!-- ======== left menu start ======== -->
+    <div id="leftsidebar" class="sidebar">
+        <div class="openmenutext">
+            <a href="javascript:void(0)" class="closemenubutton" onclick="closeMenu()">×</a>
+            <b><a href="company_presentation.html">Company Presentation</a></b>
+            <a href="pharmaceutical_research.html">1. Pharmaceutical Research</a>
+            <a href="natural_resources.html">2. Natural Resources</a>
+            <a href="shipping.html">3. Shipping</a>
+            <p>
+                <b><a href="history.html">History</a></b>
+            <p>
+                <b><a href="headquarters.html">Headquarters</a></b>
+                <a href="board_of_directors.html">1. Board of Directors</a>
+                <a href="internations_suppliers.html">2. International Suppliers</a>
+                <a href="kijuju_laboratory.html">3. Kijuju Laboratory</a>
+                <a href="mariehamn_data_lab.html">4. Mariehamn Data Lab</a>
+            <p>
+                <b><a href="personnel_registry.html">Personnel Registry</a></b>
+        </div>
+    </div>
+
+
+    <!-- ======== left menu stop ======== -->
+    <!------------------------- Header start ------------------------------>
+
+    <div id="menubuttoncontainer">
+        <button class="openmenubutton" onclick="openMenu()">Sitemap</button>
+
+    </div>
+    <!-- ==== Header container start ==== -->
+    <div id="headercontainer">
+
+        <!-- ==== Container left start ==== -->
+        <div id="headerleft">
+            <img src="images/logo.gif" alt="Tricell Laboratories" /></td>
+        </div>
+        <!-- ==== Container left stop ==== -->
+
+        <!-- ==== Container middle start ==== -->
+        <div id="headermiddle">
+            <!-- Sociala-medier start -->
+            <table>
+                <tr>
+                    <td class="socialicon"><a href="http://www.facebook.com"><img src="images/social_fb.gif"
+                                alt="Facebook" /></a>
+                    </td>
+                    <td class="socialicon"><a href="http://www.instagram.com"><img src="images/social_insta.gif"
+                                alt="Instagram" /></a></td>
+                    <td class="socialicon"><a href="http://www.twitter.com"><img src="images/social_twitter.gif"
+                                alt="Twitter" /></a></td>
+                    <td class="socialicon"><a href="http://www.youtube.com"><img src="images/social_youtube.gif"
+                                alt="Youtube" /></a></td>
+                    <td class="socialicon"><a href="http://www.pinterest.com"><img src="images/social_pin.gif"
+                                alt="Pinterest" /></a></td>
+                    <td class="socialicon"><a href="http://www.snapchat.com"><img src="images/social_snap.gif"
+                                alt="Snapchat" /></a></td>
+                </tr>
+            </table>
+            <!-- Sociala-medier start -->
+        </div>
+        <!-- ==== Container middle stop ==== -->
+
+        <!-- ==== Container right start ==== -->
+        <div id="headerright">
+            <!-- Kontaktuppgifter start -->
+            <table>
+                <tr>
+                    <td colspan="2" height="20" valign="top" align="center">
+                        <font class="contactheading">TRICELL LABORATORIES</font>
+                    <td>
+                </tr>
+                <tr>
+                    <td class="contacticon"><img src="images/contact_phone.gif" alt="Phone" /></td>
+                    <td class="contactinfo">+324 (555)-541 236</td>
+                </tr>
+                <tr>
+                    <td class="contacticon"><img src="images/contact_fax.gif" alt="Fax" /></td>
+                    <td class="contactinfo">+324 (555)-543 626</td>
+                </tr>
+                <tr>
+                    <td class="contacticon"><img src="images/contact_mail.gif" alt="Mail" /></td>
+                    <td class="contactinfo">office@tricell.com</td>
+                </tr>
+                <tr>
+                    <td class="contacticon"><img src="images/contact_web.gif" alt="Web" /></td>
+                    <td class="contactinfo">www.tricell.com</td>
+                </tr>
+            </table>
+            <!-- Kontaktuppgifter slut -->
+        </div>
+        <!-- ==== Container right stop ==== -->
+
+
+    </div>
+    <!-- ==== Header container stop ==== -->
+    <!------------------------- Header slut ------------------------------>
+    <div style="clear:both;"></div>
+    <!------------------------- Meny start ------------------------------>
+
+    <!-- Meny-box start -->
+
+    <div id="mainmenuback">
+
+        <!-- Back-knapp start -->
+        <div class="menuitem">
+            <table>
+                <tr>
+                    <td class="mainmenuicon"><a href="index.html"><img src="images/menu_back.png" alt="Back" /></a></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Back-knapp slut -->
+        <!-- ==== Menu item start ====-->
+        <div class="menuitem">
+            <table>
+                <tr>
+                    <td class="mainmenuicon"><img src="images/menu_company.png" />
+                    </td>
+                    <td class="mainmenutext"><a href="company_presentation.html">Company Presentation</a></td>
+
+                </tr>
+            </table>
+            <!-- ==== Drop menu ==== -->
+            <div class="menudropitem">
+                <table>
+                    <tr>
+                        <td class="menudropitemtext"><a href="pharmaceutical_research.html">Pharmaceutical Research</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="menudropitemtext"><a href="natural_resources.html">Natural resources</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="menudropitemtext"><a href="shipping.html">Shipping</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==== Menu item stop ====-->
+
+        <!-- ==== Menu item start ====-->
+        <div class="menuitem">
+            <table>
+                <tr>
+                    <td class="mainmenuicon"><img src="images/menu_history.png" /></td>
+                    <td class="mainmenutext"><a href="history.html">History</a></td>
+
+                </tr>
+            </table>
+        </div>
+
+        <!-- ==== Menu item stop ====-->
+
+        <!-- ==== Menu item start ====-->
+        <div class="menuitem">
+            <table>
+                <tr>
+                    <td class="mainmenuicon"><img src="images/menu_board.png" /></td>
+                    <td class="mainmenutext"><a href="headquarters.html">Headquarters</a></td>
+
+                </tr>
+            </table>
+            <!-- ==== Drop menu ==== -->
+            <div class="menudropitem">
+                <table>
+                    <tr>
+                        <td class="menudropitemtext"><a href="board_of_directors.html">Board of Directors</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="menudropitemtext"><a href="international_suppliers.html">International Suppliers</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="menudropitemtext"><a href="kijuju_laboratory.html">Kijuju Laboratory</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="menudropitemtext"><a href="mariehamn_data_lab.html">Mariehamn Data Lab</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+        <!-- ==== Menu item stop ====-->
+
+        <!-- ==== Menu item start ====-->
+        <div class="menuitem">
+            <table>
+                <tr>
+                    <td class="mainmenuicon"><img src="images/menu_personnel.png" /></td>
+                    <td class="mainmenutext"><a href="personnel_registry.html">Personnel Registry</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- ==== Menu item stop ====-->
+    </div>
+    <!-- Meny-box slut -->
+
+
+
+
+
+    <!------------------------- Meny slut ------------------------------>
+
+
+
+
+    <!-- Box-rubrik-->
+    <table class="boxrubrik">
+
+        <tr>
+            <td class="boxrubriktext">&nbsp;&nbsp; Add a new "Personnel File"</td>
+        </tr>
+
+    </table>
+    <!-- Box-rubrik slut -->
+
+    <!-- Yttre tabell start -->
+    <table class="yttretabell">
+        <tr>
+            <td>
+                <form name="employeeForm" action="" onSubmit="return formCheck()" enctype="multipart/form-data"
+                    method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="50000000" />
+
+                    <input type="hidden" name="fsignaturedate" value="" />
+                    <!-- Mellan-tabell start -->
+                    <table class="mellantabell">
+                        <tr>
+                            <td class="spaceleft">
+                                <h1>Add New Employee</h1>
+                            </td>
+                        </tr>
+
+
+
+                        <!-- Foto-kolumn -->
+                        <td class="fotokolumn" style="vertical-align: top;">
+
+
+                            <!-- Inre-tabell Foto start -->
+                            <table class="fotokolumn">
+
+                                <tr>
+                                    <!-- Behåller samma bildkälla; uppdaterar alt-text -->
+                                    <td>
+                                        <div class="photo-wrapper">
+                                            <img src="photos/default.jpg" alt="default" width="164"> <input type="file"
+                                                name="photoFile" id="photoFile" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"><!-- 10px tomrum --></td>
+                                </tr>
+                                <tr>
+                                    <td class="fotokolumntextkod">
+                                        <span class="employee">EMPLOYEE CODE: </span>
+                                        <span class="kod "><input type="text" name="femployeecode" id="femployeecode"
+                                                size="7" maxlength="7" /> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"><!-- 10px tomrum --></td>
+                                </tr>
+                                <tr>
+                                    <td class="fotokolumntextlevel">
+                                        <span>SECURITY CLEARANCE LEVEL: </span>
+                                        <span class="level"> <select class="select" name="fsecurityaccess"
+                                                id="fsecurityaccess">
+                                                <option value="C" selected="selected">C</option>
+                                                <option value="B">B</option>
+                                                <option value="A">A</option>
+                                            </select>
+                                    </td></span>
+
+                                </tr>
+                            </table>
+                            <!-- Inre-tabell Foto slut -->
+                        </td>
+
+                        <!-- Variabler-kolumn -->
+                        <td class="variabler">
+                            <!-- Inre-tabell Variabler start -->
+                            <table class="variabler-tabell">
+                                <tr>
+                                    <td class="variabel-label">NAME: </td>
+                                    <td><input type="text" name="fname" id="fname" class="input-wide" maxlength="255">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"><!-- 10px tomrum --></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label"> Date of Birth: </td>
+                                    <td><input type="date" name="fdateofbirth" id="fdateofbirth" size="20"
+                                            maxlength="11" />&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label">Sex:
+
+                                    </td>
+                                    <td> <select class="select" name="fsex" id="fsex">
+                                            <option value="Male" selected="selected">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label"> Blood Type: </td>
+                                    <td><input type="text" name="fbloodtype" id="fbloodtype" size="7"
+                                            maxlength="4" />&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label"> Height (cm):</td>
+                                    <td> <input type="text" name="fheight" id="fheight" size="7" maxlength="7" />&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label">Weight (kg): </td>
+                                    <td><input type="text" name="fweight" id="fweight" size="7" maxlength="7" />&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label"> <span>Department: </span></td>
+                                    <td><input type="text" name="fdepartment" id="fdepartment" size="20"
+                                            value="Medical Data Department" maxlength="255" />&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="variabel-label"> Rank: </td>
+                                    <td><input type="text" name="frank" id="frank" size="20" value="Junior Data Analyst"
+                                            maxlength="255" />&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                            </table>
+
+                            <!-- Inre-tabell Variabler slut -->
+                        </td>
+            </td>
+
+    </table>
+
+
+    <!-- Mellan-tabell slut -->
+    </td>
+    </tr>
+
+    </table>
+    <!-- Yttre tabell slut -->
+
+    <!-- ========================= Info slut ========================= -->
+
+    <table class="infotable">
+
+        <tr>
+            <td class="spaceleft"></td>
+
+            <td>
+                <p />
+                <h1>Background:</h1>
+                <textarea rows="5" cols="75" name="fbackground" id="fbackground" wrap="off"></textarea>
+                <p />
+            </td>
+        </tr>
+
+
+    </table>
+
+    <table class="infotable">
+
+        <tr>
+            <td class="spaceleft"></td>
+
+            <td>
+                <p />
+
+                <h1>Strengths:</h1>
+                <textarea rows="5" cols="75" name="fstrengths" id="fstrengths" wrap="off"></textarea>
+                <p />
+            </td>
+        </tr>
+
+
+    </table>
+
+    <table class="infotable">
+
+        <tr>
+            <td class="spaceleft"></td>
+
+            <td>
+                <h1>Weaknesses:</h1>
+                <textarea rows="5" cols="75" name="fweaknesses" id="fweaknesses" wrap="off"></textarea>
+                <p />
+                <input type="submit" class="button" value="Add New Employee" /><input class="button" type="reset"
+                    value="Reset Form" />
+            </td>
+        </tr>
+
+
+    </table>
+
+
+    </form>
+
+</body>
+
+</html>

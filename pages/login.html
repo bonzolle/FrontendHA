@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <style>
+        /* -------------------- Lånat från Master-Framens index.css ------------------------------ */
+        body {
+            background-color: #ffffff;
+            font-family: Arial, Verdana, Geneva, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #000000;
+        }
+
+        a:link {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        a:active {
+            color: #aad037;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #aad03720;
+            text-decoration: underline;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 0;
+            border-spacing: 0px;
+            padding: 0px;
+        }
+
+        td {
+            padding: 0px;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* ------------------- Nytt för detta formulär---------------------------------- */
+        input[type=text],
+        input[type=date],
+        input[type=file],
+        select,
+        textarea,
+        input[type=password] {
+            padding: 5px 5px;
+            box-sizing: border-box;
+            border: 1px solid black;
+            background-color: #d7ecff;
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            color: transparent;
+            width: 166px;
+        }
+
+        select option {
+            margin: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 16px;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+    </style>
+
+    <script language="JavaScript">
+
+        function passFormCheck() {
+
+            ecode = document.getElementById("employeecode").value;
+            password = document.getElementById("password").value;
+
+            if (ecode === "" || !ecode.includes("-")) {
+                alert("Ange en giltig employee code (ex: ABC-123)");
+                return false;
+            }
+            if (password === "") {
+                alert("You must give a password!");
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Login to Tricell</h1>
+    <form name="loginform" action="login.html" onSubmit="return passFormCheck()" method="post">
+        Employee Code: <input type="text" name="employeecode" id="employeecode" size="7" maxlength="7" />
+        <p />
+        Password: <input type="password" name="password" id="password" size="7" maxlength="7" />
+        <p />
+        <input type="submit" class="button" value="Login" /><input class="button" type="reset" value="Reset Form" />
+        <p />
+    </form>
+
+</body>
+
+</html>

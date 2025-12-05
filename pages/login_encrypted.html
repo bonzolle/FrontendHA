@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /* Skapar en array med alfabetet (tillåtna tecken i lösenordet) */
+        var alphabet = [
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+            "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö", " "
+        ];
+
+        var alphabetLength = alphabet.length;
+
+        function checkLegalLetters(password) {
+            var passwordok = true;
+
+            /* Delar upp lösenordet i en array där varje element är ett enskilt tecken */
+            var passwordarray = password.split("");
+
+            /* Loopa genom lösenordet... */
+            for (var i = 0; i < passwordarray.length; i++) {
+
+                /* Kollar om tecknet finns med i det tillåtna alphabetet vi skapa som variabel "var aplhabet" i början av dokumentet */
+                if (alphabet.includes(passwordarray[i]) == false) {
+                    passwordok = false;
+                }
+            }
+            return passwordok;
+        }
+
+        function encrypt() {
+            var password = document.getElementById("password").value;
+            var legalletters = checkLegalLetters(password);
+
+            /* Kollar om det fanns illegala tecken */
+            if (legalletters == true) {
+                /* Skapar ett slumpässigt heltal som kommer använda i cipher hjulet */
+                var passwordkey = Math.floor(Math.random() * alphabetLength);
+
+
+                /* Hämta tecknet ur baserat det slumpade talet ur alfabet-arrayen */
+                var keyletter = alphabet[passwordkey];
+                document.passwordform.passwordkey.value = keyletter;
+
+                /* skapar det roterade alphabetet, elementen skiftar index */
+                var rotatedalphabet = [];
+                var newletter = 0;
+                /* Loopa igenom det roterade alphabetets array, för att skriva ut de nya tecknen */
+                for (var i = 0; i < alphabetLength; i++) {
+                    newletter = i + passwordkey;
+
+                    /* om värdet är över 28, börjar det från början igen */
+                    if (newletter > alphabetLength) {
+                        newletter = newletter - alphabetLength;
+
+                    }
+
+                    rotatedalphabet[i] = alphabet[newletter]
+
+                }
+
+                var passwordold = password.split("");
+                var passwordnew = []
+
+                /* Loop, går igenom arrayen stegvis, tar det gamla lösenordet och byter ut bokstäver motsvarande det roterade alphabetet, dessa element hamnar i passwordnew som en array */
+                var passwordletter = "";
+                var passwordindex;
+
+
+                for (var i = 0; i < passwordold.length; i++) {
+                    passwordletter = passwordold[i];
+                    passwordindex = alphabet.indexOf(passwordletter);
+                    passwordnew[i] = rotatedalphabet[passwordindex];
+
+                }
+
+                /* sammanfogar arrayen för det nya lösenordet så det blir en text sträng */
+                var passwordbody = passwordnew.join('');
+                document.passwordform.passwordbody.value = passwordbody;
+
+                /* skapa en salt nyckel, mellan 0 och alpabets längd */
+                var saltkey = Math.floor(Math.random() * alphabetLength);
+                var saltletter = alphabet[saltkey];
+                document.passwordform.saltkey.value = saltletter;
+
+                /* Skapa salt-tecken, om "saltkey" = 5 vilket är "F" i det vanliga alphabetet[i]. blir alltså saltets längd 5 (börjar såklklart från 0)*/
+                var salt1 = "";
+                var salt2 = "";
+                for (var i = 0; i < saltkey; i++) {
+                    salt1 = salt1 + alphabet[Math.floor(Math.random() * 10)];
+                    salt2 = salt2 + alphabet[Math.floor(Math.random() * 10)];
+                }
+                document.passwordform.salt1.value = salt1;
+                document.passwordform.salt2.value = salt2;
+
+                /* lägger ihop saltet med det krypterade lösenordet */
+                var passwordencrypted = saltletter + salt1 + keyletter + passwordbody + salt2;
+                document.passwordform.passwordencrypted.value = passwordencrypted;
+            } else {
+                alert("Password contains illegal letters!");
+            }
+        }
+
+        function formCheck() {
+            return true;
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <h1>Password encryption</h1>
+
+    <form name="passwordform" action="" onSubmit="return formCheck()" method="get">
+
+        Password: <input type="password" name="password" id="password" size="7" maxlength="7" />
+        <p />
+        <input type="button" class="button" value="Encrypt" onClick="encrypt()" />
+        <p />
+        <input type="submit" class="button" value="Login" /><input class="button" type="reset" value="Reset Form" />
+        <p />
+
+        <table>
+            <tr>
+                <td width="80">Salt key:<br /><input type="text" name="saltkey" size="5" /></td>
+                <td width="160">Salt 1:<br /><input type="text" name="salt1" size="15" /></td>
+                <td width="100">Password key:<br /><input type="text" name="passwordkey" size="5" /></td>
+                <td width="250">Password body:<br /><input type="text" name="passwordbody" size="25" /></td>
+                <td width="160">Salt 2:<br /><input type="text" name="salt2" size="15" /></td>
+            </tr>
+        </table>
+
+        <p />
+        Encrypted password:<br /><input type="text" name="passwordencrypted" size="100" />
+
+    </form>
+</body>
+
+</html>
